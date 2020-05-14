@@ -59,8 +59,36 @@
 
 <script>
 
-</script>
+const divs = document.querySelectorAll('div');
+const audio = document.querySelectorAll('audio');
 
+function playSound (letter) {
+  let soundID = document.querySelector(`audio[data-key="${letter}"]`);
+  soundID.play();
+}
+
+function changeKeyCss (letter) {
+  let attribute = document.querySelector(`div[data-key="${letter}"]`);
+  attribute.classList.add("playing");
+}
+
+function revertKeyCss (letter) {
+  let attribute = document.querySelector(`div[data-key="${letter}"]`);
+  attribute.classList.remove("playing");
+}
+
+document.addEventListener('keydown',(e) => {
+  let key = e.keyCode;
+  changeKeyCss(key);
+  playSound(key);
+});
+
+document.addEventListener('keyup',(e) => {
+  let key = e.keyCode;
+  revertKeyCss(key);
+});
+
+</script>
 
 </body>
 </html>
